@@ -2,3 +2,4 @@
 pyenv*
 .idea*
 *DS_Store
+lib
