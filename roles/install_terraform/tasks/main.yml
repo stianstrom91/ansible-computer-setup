@@ -1,0 +1,19 @@
+---
+# Install formula foo with 'brew' in alternate path (/my/other/location/bin)
+
+- name: Install terraform
+  community.general.homebrew:
+    name: terraform
+    state: present
+
+- name: Read .zshrc file if it exists
+  slurp:
+    src: /Users/stianstrom/.zshrc
+  register: zshrc_content
+
+- name: Terraform enable autocomplete
+  ansible.builtin.command:
+    cmd: "terraform -install-autocomplete"
+  delegate_to: localhost
+  when: enable_autocomplete
+  debugger: on_failed

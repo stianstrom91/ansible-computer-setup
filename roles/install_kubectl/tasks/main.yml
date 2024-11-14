@@ -1,0 +1,22 @@
+---
+- name: Install kubectl
+  community.general.homebrew:
+    name: kubectl
+    state: present
+
+- name: Enable kubectl autocomplete
+  ansible.builtin.lineinfile:
+    path: ~/.zshrc
+    line: 'source <(kubectl completion zsh)'
+    state: present
+
+- name: Install helm
+  community.general.homebrew:
+    name: helm
+    state: present
+
+- name: Enable helm autocomplete
+  ansible.builtin.lineinfile:
+    path: ~/.zshrc
+    line: 'source <(helm completion zsh)'
+    state: present

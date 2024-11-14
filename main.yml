@@ -1,0 +1,24 @@
+- name: Install Java JDK
+  connection: local
+  hosts: localhost
+  gather_facts: false
+  roles:
+    - role: setup_java_jdk
+      tags: setup_java_jdk
+
+- name: Install kubectl
+  connection: local
+  hosts: localhost
+  gather_facts: false
+  roles:
+    - role: install_kubectl
+      tags: install_kubectl
+
+- name: Install terraform
+  connection: local
+  hosts: localhost
+  gather_facts: false
+  roles:
+    - role: install_terraform
+      tags: install_terraform
+

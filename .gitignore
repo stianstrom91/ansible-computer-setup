@@ -4,3 +4,4 @@ pyenv*
 *DS_Store
 lib
 bin
+downloads/jdk*

@@ -1,0 +1,22 @@
+---
+- name: Download Java installer
+  ansible.builtin.get_url:
+    url: "{{ java_download_url }}"
+    dest: "{{ lookup('env', 'PWD') }}/downloads/jdk-23_macos-aarch64_bin.tar.gz"
+
+- name: Unpack Java installer with tar
+  ansible.builtin.command:
+    cmd: "tar -xzf {{ lookup('env', 'PWD') }}/downloads/jdk-23_macos-aarch64_bin.tar.gz -C {{ lookup('env', 'PWD') }}/downloads/"
+
+
+- name: Copy folder x to new path location using cp
+  ansible.builtin.command:
+    cmd: "cp -r {{ lookup('env', 'PWD') }}/downloads/jdk-23.0.1.jdk /Library/Java/JavaVirtualMachines/"
+  delegate_to: localhost
+  become: yes
+
+- name: Set JAVA_HOME in shell profile
+  ansible.builtin.lineinfile:
+    path: ~/.zshrc
+    line: 'export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-23.0.1.jdk/Contents/Home'
+    state: present
